@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const nameSchema = z
+const fullnameSchema = z
   .string({
     required_error: "Name is required",
     invalid_type_error: "Name must be a string",
@@ -29,7 +29,7 @@ const passwordSchema = z
   .max(50, "Password can't be longer than 50 characters");
 
 const userSchema = z.object({
-  name: nameSchema,
+  fullname: fullnameSchema,
   email: emailSchema,
   password: passwordSchema,
 });
