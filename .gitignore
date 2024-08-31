@@ -1,0 +1,12 @@
+node_modules
+
+# Locks
+package-lock.json
+pnpm-lock.yaml
+
+# Enviroment files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local

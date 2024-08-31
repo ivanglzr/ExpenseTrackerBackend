@@ -1,0 +1,40 @@
+{
+  "name": "expensetrackerbackend",
+  "version": "1.0.0",
+  "description": "Backend for Expense Tracker",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file .env --watch index.js",
+    "dev": "node --env-file .env --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanglzr/ExpenseTrackerBackend.git"
+  },
+  "keywords": [
+    "expenses",
+    "tracker",
+    "expense-tracker",
+    "node",
+    "express",
+    "mongodb",
+    "mongoose",
+    "zod"
+  ],
+  "author": "ivanglzr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanglzr/ExpenseTrackerBackend/issues"
+  },
+  "homepage": "https://github.com/ivanglzr/ExpenseTrackerBackend#readme",
+  "dependencies": {
+    "cookie-parser": "1.4.6",
+    "cors": "2.8.5",
+    "express": "4.19.2",
+    "jsonwebtoken": "9.0.2",
+    "mongoose": "8.6.0",
+    "zod": "3.23.8"
+  }
+}
