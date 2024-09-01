@@ -37,3 +37,9 @@ const userSchema = z.object({
 export function validateUser(user) {
   return userSchema.safeParse(user);
 }
+
+const loginSchema = userSchema.omit({ fullname: true });
+
+export function validateLogin(loginData) {
+  return loginSchema.safeParse(loginData);
+}
