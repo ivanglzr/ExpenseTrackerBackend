@@ -1,9 +1,5 @@
 node_modules
 
-# Locks
-package-lock.json
-pnpm-lock.yaml
-
 # Enviroment files
 .env
 .env.development.local
