@@ -58,8 +58,6 @@ export async function loginUser(req, res) {
       message: "You logged in correctly",
     });
   } catch (error) {
-    console.error(error);
-
     return res.status(500).json({
       status: statusMessages.error,
       message: "An error occurred while loggin in",
@@ -171,6 +169,30 @@ export async function patchUser(req, res) {
     return res.status(500).json({
       status: statusMessages.error,
       message: "An error occurred while editing the user",
+    });
+  }
+}
+
+export async function deleteUser(req, res) {
+  const { id } = req.session;
+
+  try {
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user)
+      return res.status(404).json({
+        status: statusMessages.error,
+        message: "User not found",
+      });
+
+    return res.json({
+      status: statusMessages.success,
+      message: "User deleted",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: statusMessages.error,
+      message: "An error occurred while deleting the user",
     });
   }
 }
