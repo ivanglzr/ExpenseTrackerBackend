@@ -26,8 +26,7 @@ const AccountSchema = new Schema({
       },
       currency: {
         type: String,
-        required: [true, "Currency is required"],
-        default: "USD",
+        default: "EUR",
       },
       category: {
         type: String,
