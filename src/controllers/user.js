@@ -3,7 +3,11 @@ import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
 
-import { validateLogin, validateUser } from "../schemas/user.js";
+import {
+  validateLogin,
+  validatePartialUser,
+  validateUser,
+} from "../schemas/user.js";
 
 import { statusMessages, saltRounds } from "../config.js";
 
@@ -121,4 +125,52 @@ export async function logoutUser(req, res) {
   return res
     .clearCookie("access_token")
     .json({ status: statusMessages.success, message: "Logout successful" });
+}
+
+export async function patchUser(req, res) {
+  const { data, error } = validatePartialUser(req.body);
+
+  if (error)
+    return res.status(422).json({
+      status: statusMessages.error,
+      message: error.errors[0].message,
+    });
+
+  const { id } = req.session;
+
+  try {
+    if (data.email) {
+      const emailExists = await User.findOne({ email: data.email });
+
+      if (emailExists)
+        return res.status(409).json({
+          status: statusMessages.error,
+          message: "Email already exists",
+        });
+    }
+
+    if (data.password) {
+      const hassedPassword = await bcrypt.hash(data.password, saltRounds);
+
+      data.password = hassedPassword;
+    }
+
+    const user = await User.findByIdAndUpdate(id, data);
+
+    if (!user)
+      return res.status(404).json({
+        status: statusMessages.error,
+        message: "User not found",
+      });
+
+    return res.json({
+      status: statusMessages.success,
+      message: "User edited",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: statusMessages.error,
+      message: "An error occurred while editing the user",
+    });
+  }
 }
