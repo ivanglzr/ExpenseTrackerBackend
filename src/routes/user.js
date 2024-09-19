@@ -5,6 +5,7 @@ import {
   loginUser,
   logoutUser,
   patchUser,
+  deleteUser,
 } from "../controllers/user.js";
 
 import validateUser from "../middlewares/validateUser.js";
@@ -18,5 +19,6 @@ userRouter.post("/logout", logoutUser);
 userRouter.use(validateUser);
 
 userRouter.patch("/", patchUser);
+userRouter.delete("/", deleteUser);
 
 export default userRouter;
