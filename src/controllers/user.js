@@ -116,3 +116,9 @@ export async function postUser(req, res) {
     });
   }
 }
+
+export async function logoutUser(req, res) {
+  return res
+    .clearCookie("access_token")
+    .json({ status: statusMessages.success, message: "Logout successful" });
+}
