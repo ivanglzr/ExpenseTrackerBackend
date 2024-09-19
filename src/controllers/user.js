@@ -11,6 +11,31 @@ import {
 
 import { statusMessages, saltRounds } from "../config.js";
 
+export async function getUser(req, res) {
+  const { id } = req.session;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user)
+      return res.status(404).json({
+        status: statusMessages.error,
+        message: "User not found",
+      });
+
+    return res.json({
+      status: statusMessages.success,
+      message: "User found",
+      user: { fullname: user.fullname, email: user.email },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: statusMessages.error,
+      message: "An error occurred while finding the user",
+    });
+  }
+}
+
 export async function loginUser(req, res) {
   const { data, error } = validateLogin(req.body);
 
