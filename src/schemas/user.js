@@ -38,6 +38,10 @@ export function validateUser(user) {
   return userSchema.safeParse(user);
 }
 
+export function validatePartialUser(partialUser) {
+  return userSchema.partial().safeParse(partialUser);
+}
+
 const loginSchema = userSchema.omit({ fullname: true });
 
 export function validateLogin(loginData) {
