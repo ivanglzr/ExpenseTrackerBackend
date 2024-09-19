@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import {
+  getUser,
   postUser,
   loginUser,
   logoutUser,
@@ -18,7 +19,10 @@ userRouter.post("/logout", logoutUser);
 
 userRouter.use(validateUser);
 
+userRouter.get("/", getUser);
+
 userRouter.patch("/", patchUser);
+
 userRouter.delete("/", deleteUser);
 
 export default userRouter;
