@@ -1,5 +1,7 @@
 import { Schema } from "mongoose";
 
+import { transactionTypes } from "../config.js";
+
 const AccountSchema = new Schema({
   accountName: {
     type: String,
@@ -14,7 +16,7 @@ const AccountSchema = new Schema({
       type: {
         type: String,
         enum: {
-          values: ["income", "expense"],
+          values: [transactionTypes.INCOME, transactionTypes.EXPENSE],
           message:
             '{VALUE} is not a valid transaction type. Valid types are "income" and "expense".',
         },
