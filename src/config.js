@@ -4,3 +4,8 @@ export const statusMessages = {
 };
 
 export const saltRounds = 10;
+
+export const transactionTypes = {
+  INCOME: "income",
+  EXPENSE: "expense",
+};
