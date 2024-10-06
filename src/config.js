@@ -5,7 +5,18 @@ export const statusMessages = {
 
 export const saltRounds = 10;
 
-export const transactionTypes = {
-  INCOME: "income",
-  EXPENSE: "expense",
-};
+export const transactionTypes = ["income", "expense"];
+
+export const currencies = [
+  "USD",
+  "EUR",
+  "JPY",
+  "GBP",
+  "AUD",
+  "CAD",
+  "CHF",
+  "CNY",
+  "HKD",
+  "NZD",
+  "SEK",
+];
