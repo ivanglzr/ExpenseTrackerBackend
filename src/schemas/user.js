@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { userObject } from "../config.js";
+
 const fullnameSchema = z
   .string({
     required_error: "Name is required",
@@ -29,9 +31,9 @@ const passwordSchema = z
   .max(50, "Password can't be longer than 50 characters");
 
 const userSchema = z.object({
-  fullname: fullnameSchema,
-  email: emailSchema,
-  password: passwordSchema,
+  [userObject.fullname]: fullnameSchema,
+  [userObject.email]: emailSchema,
+  [userObject.password]: passwordSchema,
 });
 
 export function validateUser(user) {

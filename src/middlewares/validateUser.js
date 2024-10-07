@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 
-import { statusMessages } from "../config.js";
+import { statusMessages, cookieName } from "../config.js";
 
 export default function validateUser(req, res, next) {
-  const token = req.cookies.access_token;
+  const token = req.cookies[cookieName];
 
   if (!token)
     return res.status(401).json({

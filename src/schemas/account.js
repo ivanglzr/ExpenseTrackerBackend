@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-import { transactionTypes, currencies } from "../config.js";
+import {
+  transactionTypes,
+  currencies,
+  transactionObject,
+  accountObject,
+} from "../config.js";
 
 const accountNameSchema = z
   .string({
@@ -17,23 +22,23 @@ const balanceSchema = z.number({
 });
 
 const transactionSchema = z.object({
-  type: z.string().enum(transactionTypes),
-  amount: z.number({
+  [transactionObject.type]: z.string().enum(transactionTypes),
+  [transactionObject.amount]: z.number({
     invalid_type_error: "Amount must be a number",
     required_error: "Amount is required",
   }),
-  currency: z.enum(currencies),
-  category: z
+  [transactionObject.currency]: z.enum(currencies),
+  [transactionObject.category]: z
     .string({ invalid_type_error: "Category must be a string" })
     .optional(),
-  date: z.date(),
-  description: z.string().optional(),
+  [transactionObject.date]: z.date(),
+  [transactionObject.description]: z.string().optional(),
 });
 
 const accountSchema = z.object({
-  accountName: accountNameSchema,
-  balance: balanceSchema,
-  transactions: z.array(transactionSchema),
+  [accountObject.accountName]: accountNameSchema,
+  [accountObject.balance]: balanceSchema,
+  [accountObject.transactions]: z.array(transactionSchema),
 });
 
 export function validateAccount(account) {

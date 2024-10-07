@@ -1,7 +1,10 @@
 import bcrypt from "bcrypt";
+
 import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
+
+import { cookieName, cookieOptions } from "../config.js";
 
 import {
   validateLogin,
@@ -69,14 +72,7 @@ export async function loginUser(req, res) {
       algorithm: "HS512",
     });
 
-    const cookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 60 * 60 * 1000,
-    };
-
-    res.cookie("access_token", token, cookieOptions);
+    res.cookie(cookieName, token, cookieOptions);
 
     return res.json({
       status: statusMessages.success,
@@ -123,14 +119,7 @@ export async function postUser(req, res) {
       algorithm: "HS512",
     });
 
-    const cookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 60 * 60 * 1000,
-    };
-
-    res.cookie("access_token", token, cookieOptions);
+    res.cookie(cookieName, token, cookieOptions);
 
     return res.status(201).json({
       status: statusMessages.success,
@@ -146,7 +135,7 @@ export async function postUser(req, res) {
 
 export async function logoutUser(req, res) {
   return res
-    .clearCookie("access_token")
+    .clearCookie(cookieName)
     .json({ status: statusMessages.success, message: "Logout successful" });
 }
 

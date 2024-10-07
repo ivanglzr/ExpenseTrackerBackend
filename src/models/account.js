@@ -1,19 +1,24 @@
 import { Schema } from "mongoose";
 
-import { currencies, transactionTypes } from "../config.js";
+import {
+  accountObject,
+  currencies,
+  transactionObject,
+  transactionTypes,
+} from "../config.js";
 
 const AccountSchema = new Schema({
-  accountName: {
+  [accountObject.accountName]: {
     type: String,
     required: true,
   },
-  balance: {
+  [accountObject.balance]: {
     type: Number,
     default: 0,
   },
-  transactions: [
+  [accountObject.transactions]: [
     {
-      type: {
+      [transactionObject.type]: {
         type: String,
         enum: {
           values: transactionTypes,
@@ -22,24 +27,24 @@ const AccountSchema = new Schema({
         },
         required: [true, "Transaction type is required"],
       },
-      amount: {
+      [transactionObject.amount]: {
         type: Number,
         required: [true, "Transaction amount is required"],
       },
-      currency: {
+      [transactionObject.currency]: {
         type: String,
         enum: currencies,
         default: "EUR",
       },
-      category: {
+      [transactionObject.category]: {
         type: String,
         default: "All",
       },
-      date: {
+      [transactionObject.date]: {
         type: Date,
         default: Date.now,
       },
-      description: {
+      [transactionObject.date]: {
         type: String,
       },
     },
