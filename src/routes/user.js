@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import accountRouter from "./account.js";
+
 import {
   getUser,
   postUser,
@@ -24,5 +26,7 @@ userRouter.get("/", getUser);
 userRouter.patch("/", patchUser);
 
 userRouter.delete("/", deleteUser);
+
+userRouter.use("/account", accountRouter);
 
 export default userRouter;
