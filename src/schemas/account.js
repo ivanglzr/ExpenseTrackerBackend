@@ -22,7 +22,7 @@ const balanceSchema = z.number({
 });
 
 const transactionSchema = z.object({
-  [transactionObject.type]: z.string().enum(transactionTypes),
+  [transactionObject.type]: z.enum(transactionTypes),
   [transactionObject.amount]: z.number({
     invalid_type_error: "Amount must be a number",
     required_error: "Amount is required",
