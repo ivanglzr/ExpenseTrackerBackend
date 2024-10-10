@@ -51,3 +51,5 @@ export const currencies = [
   "NZD",
   "SEK",
 ];
+
+export const accountIdName = "accountId";
