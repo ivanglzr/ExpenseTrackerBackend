@@ -7,6 +7,7 @@ import {
   getAccount,
   postAccount,
   patchAccount,
+  deleteAccount,
 } from "../controllers/account.js";
 
 import { accountIdName } from "../config.js";
@@ -22,6 +23,12 @@ accountRouter.patch(
   `/:${accountIdName}`,
   validateId(accountIdName),
   patchAccount
+);
+
+accountRouter.delete(
+  `/:${accountIdName}`,
+  validateId(accountIdName),
+  deleteAccount
 );
 
 export default accountRouter;
