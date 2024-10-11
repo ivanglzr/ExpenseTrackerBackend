@@ -11,6 +11,7 @@ const AccountSchema = new Schema({
   [accountObject.accountName]: {
     type: String,
     required: true,
+    unique: true,
   },
   [accountObject.balance]: {
     type: Number,

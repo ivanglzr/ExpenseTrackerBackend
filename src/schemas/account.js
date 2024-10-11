@@ -44,3 +44,7 @@ const accountSchema = z.object({
 export function validateAccount(account) {
   return accountSchema.safeParse(account);
 }
+
+export function validatePartialAccount(account) {
+  return accountSchema.partial().safeParse(account);
+}
