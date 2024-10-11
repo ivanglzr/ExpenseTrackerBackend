@@ -6,6 +6,7 @@ import {
   getAccounts,
   getAccount,
   postAccount,
+  patchAccount,
 } from "../controllers/account.js";
 
 import { accountIdName } from "../config.js";
@@ -16,5 +17,11 @@ accountRouter.get("/", getAccounts);
 accountRouter.get(`/:${accountIdName}`, validateId(accountIdName), getAccount);
 
 accountRouter.post("/", postAccount);
+
+accountRouter.patch(
+  `/:${accountIdName}`,
+  validateId(accountIdName),
+  patchAccount
+);
 
 export default accountRouter;
