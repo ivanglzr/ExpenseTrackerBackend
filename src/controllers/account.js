@@ -128,7 +128,7 @@ export async function patchAccount(req, res) {
     if (!user)
       return res.status(404).json({
         status: statusMessages.error,
-        message: "User doesn't exists",
+        message: "User doesn't exist",
       });
 
     const accountIndex = user[userObject.accounts].findIndex(
@@ -158,6 +158,47 @@ export async function patchAccount(req, res) {
     return res.status(500).json({
       status: statusMessages.error,
       message: "An error occurred while",
+    });
+  }
+}
+
+export async function deleteAccount(req, res) {
+  const { id } = req.session;
+  const accountId = req.params[accountIdName];
+
+  try {
+    const user = await User.findById(id, userObject.accounts);
+
+    if (!user) {
+      return res.status(404).json({
+        status: statusMessages.error,
+        message: "User doesn't exist",
+      });
+    }
+
+    const accountIndex = user[userObject.accounts].findIndex(
+      (account) => account._id.toString() === accountId
+    );
+
+    if (accountIndex === -1) {
+      return res.status(404).json({
+        status: statusMessages.error,
+        message: "Account doesn't exist",
+      });
+    }
+
+    user[userObject.accounts].splice(accountIndex, 1);
+
+    await user.save();
+
+    return res.json({
+      status: statusMessages.success,
+      message: "Account deleted",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: statusMessages.error,
+      message: "An error occurred while deleting the account",
     });
   }
 }
